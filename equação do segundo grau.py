@@ -91,7 +91,6 @@ def eq2grau(a = None, b = None, c = None):
         print("Equação de Primeiro Grau: X = {}".format(x))
         return x
     imaginario = False
-    minha_raiz = 0
     meu_delta = delta(a,b,c) # Procure calcular uma única vez, para não consumir muito processamento.
     if meu_delta < 0:
         #sleep(0.5)
@@ -135,3 +134,6 @@ if __name__ == "__main__":
     clear_screen()
     eq2grau()
 # eq2grau(1,2,-3) # Caso queira chamar a função para calcular com a,b,c.
+
+
+
