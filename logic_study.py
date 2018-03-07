@@ -1,12 +1,26 @@
+
+# OPTION 1
 count = 0
 for i in range(-1,2):
     for j in range(-1,2):
         if i != 0 or j != 0:
             print("i or j -> i:{}; j:{}".format(i,j))
             count += 1
-    print(count)
+print(count)
 print("\n")
 
+
+# OPTION 2
+count =0
+for i in range(-1,2):
+    for j in range(-1,2):
+        if i != 0 and j != 0:
+            print("i and j -> i:{}; j:{}".format(i,j))
+            count += 1
+print(count)
+print("\n")
+
+# OPTION 3
 count = 0
 for i in range(-1,2):
     for j in range(-1,2):
@@ -15,9 +29,10 @@ for i in range(-1,2):
         else:
              print("i | j -> i:{}; j:{}".format(i,j))
              count += 1
-    print(count)
+print(count)
 print("\n")
 
+# OPTION 4
 count = 0
 for i in range(-1, 2):
     for j in range(-1, 2):
@@ -26,11 +41,3 @@ for i in range(-1, 2):
             count += 1
 print(count)
 print("\n")
-
-count =0
-for i in range(-1,2):
-    for j in range(-1,2):
-        if i != 0 and j != 0:
-            print("i and j -> i:{}; j:{}".format(i,j))
-            count += 1
-print(count)
