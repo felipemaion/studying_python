@@ -38,17 +38,31 @@ image = [[1, 1, 1],
 # The other three integers are obtained the same way, then the surrounding integers are cropped from the final result.
 
 def boxBlur(image):
-    rows = len(image)
-    columms = len(image[0])
+    # Get dimensions:
+    rows, columms = len(image), len(image[0])
+    # Create a new image same size, but all None:
     new_image = [[None for x in range(columms)] for y in range(rows)]
+    # Scan the image
     for row in range(rows):
         for columm in range(columms):
-            if row > 1 and columm > 1 and row < rows - 1 and columm < columms -1 :
+            # and only change if there are neighbors surrounding:
+            if row > 0 and columm > 0 and row < rows - 1 and columm < columms - 1:
+                # Get the avg:
                 new_image[row][columm] = get_average(row,columm,image)
-            else:
+            else: # Just let it None (I will set none anyway), could be pass here...
                 new_image[row][columm] = None
-    return new_image
+    # Crop the unused part of the image!
+    return crop_image(new_image)
 
+def crop_image(image):
+    new_img = []
+    for row in image:
+        # Remove the Nones
+        clean = [x for x in row if x is not None]
+        # If still has something inside, add it... to avoid empty lines.
+        if len(clean):
+            new_img.append(clean)
+    return new_img
 
 def get_average(row,columm,image):
     avg = 0
@@ -66,4 +80,4 @@ mat=  [[1, 2, 3, 4, 5],
         [1, 2, 3, 4, 5],
         [1, 2, 3, 4, 5]]
 
-print(boxBlur(image))
+print(*boxBlur(image), sep="\n")
