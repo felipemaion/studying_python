@@ -4,8 +4,8 @@
 
 import random
 
-def cria_matriz():
-     return list("1"*42)
+def cria_matriz(n):
+     return list("1"*n*3)
 
 def imprimi_matriz(matriz, visiveis = []):
     for i in range(0,len(matriz)-2, 3):
@@ -16,19 +16,24 @@ def imprimi_matriz(matriz, visiveis = []):
 
         print("{} {} {}".format(a,b,c))
 
-def gerar_aleatorios():
+def gerar_aleatorios(matrix):
+    n = len(matriz)
     aleatorios = []
     bias = 0
 
-    for i in range(14):
+    for i in range(int(n/3)):
         chute = random.sample(range(0+bias,3+bias),2)
         aleatorios.append(chute)
         bias += 3
     return [item for sublist in aleatorios for item in sublist]
 
-
-matriz = cria_matriz()
+print("Cria Matriz de 5 linhas:")
+matriz = cria_matriz(5)
 # imprimi_matriz(matriz)
-aleatorios = gerar_aleatorios()
+aleatorios = gerar_aleatorios(matriz)
 # print(aleatorios)
 imprimi_matriz(matriz, aleatorios)
+
+print("Cria Matriz de 14 linhas:")
+matriz = cria_matriz(14)
+imprimi_matriz(matriz,gerar_aleatorios(matriz))

@@ -7,10 +7,18 @@
 # For st = "abcdc", the output should be
 # buildPalindrome(st) = "abcdcba".
 def buildPalindrome(st):
-    finished = False
-    while not finished:
-        ts = st[::-1]
+    if is_palindrome(st):
+        return True
+    size = len(st)
+    for i in range(size):
+        sub_string = st[i:size]
+        print(sub_string)
+        if is_palindrome(sub_string):
+            return st + st[0:i][::-1]
 
 
 def is_palindrome(st):
     return True if st[::-1] == st else False
+
+print(buildPalindrome(st = "abcdc"))
+print(buildPalindrome("abba"))
