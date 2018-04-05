@@ -3,7 +3,7 @@
 
   <head>
     <head>
-      <title>Bootstrap Example</title>
+      <title>Automatização Residencial</title>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
@@ -12,91 +12,83 @@
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
       <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js" integrity="sha384-SlE991lGASHoBfWbelyBPLsUlwY1GwNDJo3jSJO04KZ33K2bwfV9YBauFfnzvynJ" crossorigin="anonymous"></script>
       <link rel="stylesheet" href="grid.css">
+
+          <script>
+      $(document).ready(function(){
+          $('.btn').click(function(){
+            $('.btn').load('swap.php', {'device':this.name});
+            // alert(this.name);
+            location.reload();
+          });
+      });
+    </script>
     </head>
 
 
 
 
-<!-- 
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
-
 
     <body>
-    
+
 
     <div class="container-fluid">
       <br>
-      <center><h4> Temperatura: 26.3˚C</h4>
-      <h4> Umidade: 73.2% </h4></center>
+      <?php $umid_temp = exec("python3 get_temp_umid.py &"); ?>
+      <?php $umid_temp = explode(',', $umid_temp); ?>
+      <center><h4> Temperatura: <?=$umid_temp[0]?>˚C</h4>
+      <h4> Umidade: <?=$umid_temp[1]?>% </h4></center>
       <br>
 
       <center>
-      <div class="row">
-          <div class="col">
-              <button type="button" class="btn btn-device">
-                <span class="fa fa-lightbulb off" ></span> 
-                <span class="fa-class"> LED PAINEL </span>
-              </button>
-          </div>
+    
+      <?php 
+        $data = exec("python3 getstatus.py &");
+        // Removing the outer list brackets
+        $data =  substr($data,1,-1);
 
-        <div class="col">
-            <button type="button" class="btn btn-device">
-              <span class="fa fa-lightbulb on"></span>
-              <span class="fa-class"> ABAJUR </span>
-            </button>
+        $myArr = array();
+        // Will get a 3 dimensional array, one dimension for each list
+        $myArr =explode('],', $data);
+
+        // Removing last list bracket for the last dimension
+        if(count($myArr)>1)
+        $myArr[count($myArr)-1] = substr($myArr[count($myArr)-1],0,-1);
+
+        // Removing first last bracket for each dimenion and breaking it down further
+        foreach ($myArr as $key => $value) {
+        $value = substr($value,1);
+        $myArr[$key] = array();
+        $myArr[$key] = explode(',',$value);
+        }
+        ?>
+        <!-- Put the data in the buttons -->
+        <div class="row">
+        <?php 
+        $count = 0;
+            foreach ($myArr as list($pin, $io, $description,$state,$high,$on_off, $name)) 
+            {
+
+
+              
+                echo '<div class="col">';
+                  echo '<button name='.$name.' type="button" class="btn btn-device">';
+                  echo '<span class="fa fa-lightbulb '.$on_off.'"></span>';
+                  echo '<span class="fa-class"> '.$description.' </span>';
+                echo '</div>';
+                $count += 1;
+                if ($count == 2) {
+                  echo '<div class="w-100"></div>';
+                  $count = 0;
+                }
+
+            }
+        ?>
         </div>
-
-        <div class="w-100"></div>
-        <div class="col">
-            <button type="button" class="btn btn-device">
-              <span class="fa fa-lightbulb on" ></span> 
-              <span class="fa-class"> COMPUTADOR </span>
-            </button>
-        </div>
-
-      <div class="col">
-          <button type="button" class="btn btn-device">
-            <span class="fa fa-lightbulb off"></span>
-            <span class="fa-class"> TV </span>
-          </button>
-      </div>
-      <div class="w-100"></div>
-      <div class="col">
-          <button type="button" class="btn btn-device">
-            <span class="fa fa-lightbulb on" ></span> 
-            <span class="fa-class"> VENTILADOR </span>
-          </button>
-      </div>
-
-      <div class="col">
-          <button type="button" class="btn btn-device">
-            <span class="fa fa-lightbulb on"></span>
-            
-            <span class="fa-class"> MASTURBADOR </span>
-          </button>
-      </div>
-        <div class="w-100"></div>
-        <div class="col">
-            <button type="button" class="btn btn-device">
-              <span class="fa fa-lightbulb off" ></span> 
-              <span class="fa-class"> FORNO MICROONDAS </span>
-            </button>
-        </div>
-
-      <div class="col">
-          <button type="button" class="btn btn-device">
-            <span class="fa fa-lightbulb on"></span>
-            <span class="fa-class"> RADIO </span>
-          </button>
-      </div>
-      </div>
     </center>
       <br>
 
       <br>
-
+   
     </div>
     
     </body>

@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
-#Fazendo leitura de temperatura com DHT22
-#Programa lendo temperatura e humidade
-# Autor : FILIPEFLOP
+# Atuador conforme temperatura pre-definida
+# Autor : FELIPE MAION
 import RPi.GPIO as GPIO  #biblioteca GPIO
 
 import Adafruit_DHT
@@ -26,7 +25,7 @@ def inicializaBoard():
     GPIO.setwarnings(False)     #desabilita as mensagens
 
 def definePinoComoSaida (numeroPino):
-        GPIO.setup (numeroPino, GPIO.OUT)
+    GPIO.setup (numeroPino, GPIO.OUT)
 
 def escreveParaPorta(numeroPino, estadoPorta):
     GPIO.output(numeroPino, estadoPorta)
@@ -37,11 +36,11 @@ def liga_rele(numeroPino, estadoPorta):
     escreveParaPorta(numeroPino, estadoPorta)
 flag = None
 # Informacoes iniciais
-print ("*** Lendo os valores de temperatura e umidade");
+print ("*** Lendo os valores de temperatura e umidade")
 while(1):
     print (time.asctime())
     # Efetua a leitura do sensor
-    umid, temp = Adafruit_DHT.read_retry(sensor, pino_sensor);
+    umid, temp = Adafruit_DHT.read_retry(sensor, pino_sensor)
     # Caso leitura esteja ok, mostra os valores na tela
     if umid is not None and temp is not None:
         print ("\033[4;30;43mTemperatura = {0:0.1f} Umidade = {1:0.1f}\33[m").format(temp, umid);
