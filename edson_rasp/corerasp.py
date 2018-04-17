@@ -39,7 +39,9 @@ def set_rele(pin_number, state):
 
 def get_umid_temp():
     if temp_sensor:
-        umid, temp = Adafruit_DHT.read_retry(sensor, pino_sensor)
+        umid, temp = None, None
+        while umid == None and temp == None:
+            umid, temp = Adafruit_DHT.read_retry(sensor, pino_sensor)
         temp_file = open("temp.txt", "w")
         temp_file.write(str(temp))
         temp_file.close()
