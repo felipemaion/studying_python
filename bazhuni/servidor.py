@@ -98,7 +98,7 @@ def processo_ativo(socket_cliente):
     titulo = titulo + '{:^9}'.format("T. Sis.")
     titulo = titulo + '{:^12}'.format("Mem. (%)")
     titulo = titulo + '{:^12}'.format("RSS")
-    tituo = titulo + '{:^12}'.format("VMS")
+    titulo = titulo + '{:^12}'.format("VMS") # Maion: Fix Typo. 
     titulo = titulo + " Executável"
     
     lista = psutil.pids()
