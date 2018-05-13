@@ -24,9 +24,10 @@ def join_labels(labels, a, b):
 
 
 
-def join_table(table, a, b):
-    if b < a:
-        a, b = b, a
+def join_table(table, a, b): # M, 3,0
+
+    if b < a: # 0 < 3 -> True
+        a, b = b, a # a = 0, b=3
 
     row = []
     for i in range(0, a):
@@ -51,12 +52,8 @@ def UPGMA(table, labels):
    
     while len(labels) > 1:
         
-        x, y = lowest_cell(table)
-
-       
+        x, y = lowest_cell(table) # (3,0)
         join_table(table, x, y)
-
-       
         join_labels(labels, x, y)
 
     
