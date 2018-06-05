@@ -9,7 +9,7 @@ class Segredos:
         Conn = b.conectabanco('D:\Projetos\Android\Api OurSecrets\Banco\BANCO_API.FDB')
         Cur  = Conn.cursor()
 
-    def datetime_handler(x):
+    def datetime_handler(self, x):
         if isinstance(x, datetime.datetime):
             return x.isoformat()
         raise TypeError("Unknown type")
