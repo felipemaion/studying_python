@@ -130,7 +130,7 @@ class Elevator:
 
 
     def turn_on(self): 
-        # I BET USD 1.000.000,00 that this can be REALLY improved!!!!!
+        # I BET USD 1.000.000,00 that this can be **REALLY** improved!!!!!
         # What a mess!!
         
         self.fix_calls() # just to be sure...    
@@ -155,8 +155,7 @@ class Elevator:
                             del self.calls[elem] # ???
                             # print("Debug Calls", self.calls)
                             # elem = 0
-                            
-                                #self.action() # Lets move on...
+                            # Define the where it must go:
                             if (self.current_floor < self.calls[elem][0]):
                                 self.direction = UP
                                 self.move_up()
@@ -317,7 +316,7 @@ elevator1 = Elevator(building=building1,max_number_of_passangers=6,max_kg=720)
 
 
 felipe = Person(desired_floor = 2, current_floor= 0, name="Felipe", weight=120)
-aqeel = Person(desired_floor = 0, current_floor= 1, name="Aqeel", weight=120)
+aqeel = Person(desired_floor = 2, current_floor= 1, name="Aqeel", weight=120)
 john = Person(desired_floor = 2, current_floor= 1, name="John", weight=120)
 
 aqeel.enters(building1) # 1st floor
