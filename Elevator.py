@@ -187,18 +187,18 @@ class Elevator:
                             # elem = 0     
                             break
 
-            if self.direction == UP:
-                if self.up_calls(self.current_floor) or self.stop_calls(self.current_floor):
-                    self.direction = STOP
-                    # print("Going up, and reached the floor")
-                    continue# self.action()
-                self.move_up()
-            if self.direction == DOWN:
-                if self.down_calls(self.current_floor) or self.stop_calls(self.current_floor):
-                    self.direction = STOP
-                    # print("Going down, and reached the floor")
-                    continue# self.action()
-                self.move_down()
+                if self.direction == UP:
+                    if self.up_calls(self.current_floor) or self.stop_calls(self.current_floor):
+                        self.direction = STOP
+                        # print("Going up, and reached the floor")
+                        continue# self.action()
+                    self.move_up()
+                if self.direction == DOWN:
+                    if self.down_calls(self.current_floor) or self.stop_calls(self.current_floor):
+                        self.direction = STOP
+                        # print("Going down, and reached the floor")
+                        continue# self.action()
+                    self.move_down()
         
 
     # When someone calls the elevator at one floor, to go up or down.
