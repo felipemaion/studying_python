@@ -45,15 +45,18 @@ class Person:
         # input()
         while not (elevator.door_status == OPENED and elevator.current_floor == self.current_floor): # We should use threads for more than one passenger...
             print(self.name, "is waiting elevator. Current elevator floor:", elevator.current_floor)
-            elevator.turn_on()
+            f1 = threading.Thread(name=self, target=elevator.turn_on())
+            f1.start
+            
             # input()
         else:
             print("Elevator is here...")
 
     def waits_to_get_off_of(self,elevator):
-        while not (elevator.door_status == OPENED and elevator1.current_floor == self.desired_floor):
+        while not (elevator.door_status == OPENED and elevator.current_floor == self.desired_floor):
             print("Waiting to get off of the elevator")
-            elevator.turn_on()
+            f1 = threading.Thread(name=self, target=elevator.turn_on())
+            f1.start
             # input()
         else:
             print("Elevator arrived at the desired floor,",self.name)
@@ -306,26 +309,61 @@ def thead_me(person, elevator):
     person.waits_to_get_off_of(elevator)
     person.get_off_elevator(elevator)
 
+jobs = []
+
 def use_elevator(person, elevator):
     f1 = threading.Thread(name=person.name, target=thead_me(person,elevator))
-    f1.start
+    jobs.append(f1)
+    f1. daemon=True
+    f1.start()
+
+def stop():
+    for worker in jobs:
+        worker.join()
 
 
-building1 = Building(number_of_floors=10, num_basement=0)
-elevator1 = Elevator(building=building1,max_number_of_passangers=6,max_kg=720)
+import asyncio
+from concurrent.futures import ThreadPoolExecutor
+def func(a, b):
+    # Do time intensive stuff...
+    return a + b
 
 
-felipe = Person(desired_floor = 2, current_floor= 0, name="Felipe", weight=120)
-aqeel = Person(desired_floor = 2, current_floor= 1, name="Aqeel", weight=120)
-john = Person(desired_floor = 2, current_floor= 1, name="John", weight=120)
+async def main(loop):
+    executor = ThreadPoolExecutor()
+    #     use_elevator(felipe, elevator1)
+    # use_elevator(aqeel, elevator1)
+    # use_elevator(john, elevator1)
+    building1 = Building(number_of_floors=10, num_basement=0)
+    elevator1 = Elevator(building=building1,max_number_of_passangers=6,max_kg=720)
+    felipe = Person(desired_floor = 2, current_floor= 0, name="Felipe", weight=120)
+    aqeel = Person(desired_floor = 2, current_floor= 1, name="Aqeel", weight=120)
+    john = Person(desired_floor = 2, current_floor= 1, name="John", weight=120)
+    aqeel.enters(building1) # 1st floor
+    felipe.enters(building1)
+    john.enters(building1)
+    result = await loop.run_in_executor(executor, use_elevator, felipe, elevator1)
+    result1 = await loop.run_in_executor(executor, use_elevator, aqeel, elevator1)
+    result2 = await loop.run_in_executor(executor, use_elevator, john, elevator1)
+    
+    
 
-aqeel.enters(building1) # 1st floor
-felipe.enters(building1)
-john.enters(building1)
-use_elevator(felipe, elevator1)
-use_elevator(aqeel, elevator1)
-use_elevator(john, elevator1)
 
+if __name__ == "__main__":
+    loop = asyncio.get_event_loop()
+    loop.run_until_complete(main(loop))
+
+
+
+
+    # The following should be threads... but it is not working...
+
+
+# From the good fellow Raul:
+# self.Process2 = threading.Thread(target=self.ExportProcess)
+# jobs.append(self.Process2)
+# self.Process2.daemon=True
+# self.Process2.start()
 
 
 

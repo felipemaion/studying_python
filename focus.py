@@ -1,4 +1,6 @@
 import Xlib.display
+
+# NOT WORKING WITH WINDOWS!
 display = Xlib.display.Display()
 window = display.get_input_focus().focus
 wmname = window.get_wm_name()
