@@ -1,0 +1,17 @@
+*~
+.DS_Store
+
+.idea
+*.iml
+
+*.pyc
+env/
+
+config/prod.cfg
+config/client_secrets.json
+config/auth_token.json
+config/session.onedrive.pickle
+config/lastNewsletterUrl
+
+ebooks/
+node_modules/
