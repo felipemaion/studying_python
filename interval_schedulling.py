@@ -154,11 +154,12 @@ class Schedulling:
 #Enter2 9pm 4am
 #Enter3 3am 2pm
 #Enter4 1pm 7pm
-job1 = Job(1,'6pm','6am')
-job2 = Job(2, '9pm','4am')
-job3 = Job(3, '3am', '2pm')
-job4 = Job(4, '1pm','7pm')
-job5 = Job(5, '1pm', '7pm')
-jobs = [job1,job2,job3, job4, job5]
-sc = Schedulling(jobs)
-print(sc)
+if __name__== "__main__":
+    job1 = Job(1,'6pm','6am')
+    job2 = Job(2, '9pm','4am')
+    job3 = Job(3, '3am', '2pm')
+    job4 = Job(4, '1pm','7pm')
+    job5 = Job(5, '1pm', '7pm')
+    jobs = [job1,job2,job3, job4, job5]
+    sc = Schedulling(jobs)
+    print(sc)
