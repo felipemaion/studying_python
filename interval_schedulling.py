@@ -77,7 +77,7 @@ class Job:
         return self
     # def what should be printed when print(job) is called:
     def __str__(self):
-        return str("("+ self.startStr + " ," +  self.endStr + ")")
+        return str("("+ self.startStr + ", " +  self.endStr + ")")
 
 
 
