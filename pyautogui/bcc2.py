@@ -1,5 +1,8 @@
 import pyautogui
 import time
+import win32clipboard # Uses PyWin32 http://timgolden.me.uk/pywin32-docs/win32clipboard.html
+
+import win32con
 
 # ToDo:
 
@@ -13,9 +16,7 @@ import time
 
 
 
-# Uses PyWin32 http://timgolden.me.uk/pywin32-docs/win32clipboard.html
-import win32clipboard
-import win32con
+
 
 def get_clipboard():
 	win32clipboard.OpenClipboard()
