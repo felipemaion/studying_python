@@ -66,7 +66,7 @@ class Job:
         if self.start > self.end:
             for hour,_ in enumerate(self.period):
                 # Set the working period of the job as 1 for the job that ends in another day.
-                self.period[hour] = 1 if hour + 1 >= self.start or hour + 1 <= self.end else 0                # self.period[hour] = 1 if hour + 1 <= self.end else 0
+                self.period[hour] = 1 if hour + 1 >= self.start or hour + 1 <= self.end else 0
         return self.period
     # Define the add of two jobs, ex: [1,0,...,1] + [1,1,...,0] = [2,1,...,1]:    
     def __add__(self, job):
