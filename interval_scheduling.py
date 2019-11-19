@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 # -*- coding:utf-8 -*-
 ###
-# File: /Users/maion/OneDrive/Documentos/Documentos Felipe/programs/ruby/Python/PyCharmProjects/testes/interval_schedulling.py
+# File: /Users/maion/OneDrive/Documentos/Documentos Felipe/programs/ruby/Python/PyCharmProjects/testes/interval_scheduling.py
 # Project: /Users/maion/OneDrive/Documentos/Documentos Felipe/programs/ruby/Python/PyCharmProjects/testes
 # Created Date: Sunday, November 17th 2019, 11:24:29 pm
 # Author: Felipe Maion
 # -----
-# Last Modified: Mon Nov 18 2019
+# Last Modified: Tue Nov 19 2019
 # Modified By: Felipe Maion
 # -----
 # Copyright (c) 2019 MaioneSys
@@ -51,7 +51,7 @@ class Job:
         # Check if the string has an 'p' or 'P' in it, if so, it is evening add 12 hours.
         evening = True if 'p' in re.sub(r'[0-9]+','',hourStr) or 'P' in re.sub(r'[0-9]+','',hourStr) else False
         # Get the raw hour(remove strings): 6p.m = 6; 5a.m = 5:
-        rawHour = re.sub(r'[aA-zZ]+','',hourStr) 
+        rawHour = re.sub(r'[^\d]','',hourStr) 
         if evening: 
             hour = int(rawHour) + 12 
         else: 
@@ -81,12 +81,12 @@ class Job:
 
 
 
-class Schedulling:
+class Schedule:
     def __init__(self, jobs):
         self.bestOutCome = []
         self.jobs = jobs
         self.maxRunningTime = 0
-        self.schedule()
+        self.scheduling()
 
     def allCombinations(self):
         allPossibilities = []
@@ -98,7 +98,7 @@ class Schedulling:
             allPossibilities.append(combine(n,self.jobs)) 
         return allPossibilities
 
-    def schedule(self):
+    def scheduling(self):
         possibleSollutions = {}
         bestSolutions = {}
         getCombinations = self.allCombinations()
@@ -134,7 +134,7 @@ class Schedulling:
         return self.bestOutCome
 
     def __str__(self):
-        # Print the best schedullings even if there are more than one option:
+        # Print the best schedulings even if there are more than one option:
 
         my_str = ""
         
@@ -145,7 +145,7 @@ class Schedulling:
                 # That's necessary to get the time as string from the Job object:
                 myPeriod += str(jobs)
                 myJobs.append(str(jobs.jobID))
-            my_str += "Max running time: " + str(self.maxRunningTime) + "hours. Jobs: " + str(myJobs) + " with time:"+ str(myPeriod)+ "\n"
+            my_str += "Max running time: " + str(self.maxRunningTime) + "hours.\nJobs: " + str(myJobs) + "\nDuring time: "+ str(myPeriod)+ "\n"
         return my_str
 
 
@@ -155,11 +155,20 @@ class Schedulling:
 #Enter3 3am 2pm
 #Enter4 1pm 7pm
 if __name__== "__main__":
-    job1 = Job(1,'6pm','6am')
-    job2 = Job(2, '9pm','4am')
-    job3 = Job(3, '3am', '2pm')
-    job4 = Job(4, '1pm','7pm')
-    job5 = Job(5, '1pm', '7pm')
-    jobs = [job1,job2,job3, job4, job5]
-    sc = Schedulling(jobs)
-    print(sc)
+    # job1 = Job(1,'6pm','6am')
+    # job2 = Job(2, '9pm','4am')
+    # job3 = Job(3, '3am', '2pm')
+    # job4 = Job(4, '1pm','7pm')
+    # job5 = Job(5, '1pm', '7pm')
+    # jobs = [job1,job2,job3, job4, job5]
+    # sc = Schedule(jobs)
+    # print(sc)
+    allJobs = []
+    numberOfJobs = int(input("\nPlease, Enter Number of Jobs: "))
+    print("\nEnter in the format: StartTime, EndTime")
+    print("Example: 6pm, 6am\n")
+    for idJob in range(1,numberOfJobs+1):
+        jobStart, jobEnd = input("Job #" + str(idJob) + ": ").split(",")
+        allJobs.append(Job(idJob, jobStart, jobEnd))
+    print("\n----------------\n")
+    print(Schedule(allJobs))
