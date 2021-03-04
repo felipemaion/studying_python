@@ -14,4 +14,4 @@ while True:
     if pix == RGB_TRIGGER: 
         pyautogui.mouseDown(x=x,y=y, button='left')
         pyautogui.mouseUp(x=x,y=y, button='left')
-        trigged = False
+        # trigged = False
