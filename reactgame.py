@@ -21,7 +21,7 @@ while True:
         # print("TRIGGED!")
 
         # rgb(75, 219, 106)
-        # pyautogui.click(x=x,y=y)
+        # pyautogui.click(x=x,y=y, button='left')
         pyautogui.mouseDown(x=x+1,y=y+1, button='left')
         pyautogui.mouseUp(x=x+2,y=y+2, button='left')
 
