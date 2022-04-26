@@ -16,10 +16,12 @@ def input_usuario():
     try:
         kWh = float(input("Informe a quantidade de kWh consumida: "))
         tipo = input("Informe o tipo de instalação: R para residências, I para indústrias e C para comércios: ")[0].upper()
+        if tipo not in 'RIC': 
+            raise ValueError
         return kWh, tipo
     except ValueError:
-        print("Números apenas")
-        input_usuario()
+        print("ERRO:\n\tCONSUMO: Números apenas (kWh)\n\tTIPO: R, I ou C a instalação.")
+        return input_usuario()
         
 def calcular_consumo(kWh, tipo):
     if tipo == 'R':
